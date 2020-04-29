@@ -1,0 +1,24 @@
+{
+  "name": "19.mock-test-3.2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keshav37a/polling-system-api-test.git"
+  },
+  "author": "Keshav Mathur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keshav37a/polling-system-api-test/issues"
+  },
+  "homepage": "https://github.com/keshav37a/polling-system-api-test#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.3"
+  }
+}
