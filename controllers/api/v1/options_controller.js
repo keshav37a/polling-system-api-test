@@ -24,14 +24,23 @@ module.exports.createOption = async function(req, res){
         let questionId = req.params.id;
         let optionText = req.query.option;
         // let optionText = "randomOptionN";
-        let foundQuestion = await Question.findById(questionId);
+        let foundQuestion = await Question.findById(questionId).populate('options');
         if(foundQuestion){
+
+            let foundOption = await Option.findOne({text:optionText});
+            if(foundOption){
+                return res.status(405).json({
+                    message: 'This option title has already been added'
+                });
+            }
+
             let option = await Option.create({text: optionText, questionId: questionId, votes:0});
             foundQuestion.options.push(option);
             await foundQuestion.save();
+            let formattedQuestion = FData.getFormattedData(foundQuestion);
             if(option){
                 return res.status(200).json({
-                    data: option,
+                    data: formattedQuestion,
                     message: 'Successfully added option'
                 });
             }
@@ -84,7 +93,7 @@ module.exports.deleteOption = async function(req, res){
             if(foundOption.votes>0){
                 return res.status(405).json({
                     message: 'This option cannot be deleted as it has votes'
-                })
+                });
             }
             else{
                 let removedOption = await foundOption.remove();
