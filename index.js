@@ -10,3 +10,5 @@ app.listen(port, function(err){
 
     console.log(`app up and running on port ${port}`);
 })
+
+//errors encountered - getting Cannot convert circular structure to json when querying from db. Forgot to add await before the db command
