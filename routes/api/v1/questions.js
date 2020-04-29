@@ -7,5 +7,6 @@ router.get('/', questionsController.home);
 router.get('/:id', questionsController.getQuestionDetails);
 router.post('/create', questionsController.createQuestion);
 router.post('/:id/options/create', optionsController.createOption);
+router.delete('/:id/delete', questionsController.deleteQuestion);
 
 module.exports = router;

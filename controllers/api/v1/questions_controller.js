@@ -1,12 +1,18 @@
 const Question = require('../../../models/question');
 const FData = require('../../../config/formattedData');
+const Option = require('../../../models/option');
 
 module.exports.home = async function(req, res){
     try{
-        console.log(`home in questions controller called`);
         let questions = await Question.find().populate('options');
+        let data = [];
+        for(let i=0; i<questions.length; i++){
+            console.log(questions[i]);
+            let formattedQ = FData.getFormattedData(questions[i]);
+            data.push(formattedQ);
+        }
         return res.status(200).json({
-            data: questions,
+            data: data,
             message: 'List of questions'
         })
     }
@@ -67,3 +73,49 @@ module.exports.createQuestion = async function(req, res){
         });
     }
 }
+
+module.exports.deleteQuestion = async function(req, res){
+    try{
+        let qId = req.params.id;
+        let isVotePresent = false;
+        let foundQuestion = await Question.findById(qId).populate('options');
+        if(foundQuestion){
+            let options = foundQuestion.options;
+            for(let i=0; i<options.length; i++){
+                let votes = options[i].votes;
+                console.log(options[i]);
+                if(votes>0){
+                    isVotePresent = true;
+                    break;
+                }
+            }
+            if(isVotePresent){
+                return res.status(405).json({
+                    message: 'You cant delete this question as one of its options has votes in it'
+                })
+            }
+            else{
+                for(let i=0; i<options.length; i++){
+                    console.log(options[i]);
+                    await Option.findOneAndDelete({_id:options[i]});
+                }
+                let removedQuestion = await foundQuestion.remove();
+                return res.status(200).json({
+                    data: removedQuestion,
+                    message: 'Question and associated options removed successfully'
+                })
+            }
+        }
+        else{
+            return res.status(405).json({
+                message: 'Question id not found'
+            })
+        }
+    }
+    catch(err){
+        return res.status(500).json({
+            message: `${err}`
+        });
+    }
+}
+
