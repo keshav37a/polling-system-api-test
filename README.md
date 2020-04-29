@@ -6,9 +6,10 @@ To install any dependency required, just run the command `npm install <dependenc
 For example `npm install express`
 
 The following dependencies need to be installed before running the project\
-* express\
-* nodemon\
-* mongoose\
+
+* express
+* nodemon
+* mongoose
 
 ## Running the project
 
