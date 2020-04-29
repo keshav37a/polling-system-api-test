@@ -48,7 +48,7 @@ module.exports.getQuestionDetails = async function(req, res){
 module.exports.createQuestion = async function(req, res){
 
     try{
-        let title = req.query.title;
+        let title = req.body.title;
         console.log(title);
         console.log('create question called in questions_controller');
 

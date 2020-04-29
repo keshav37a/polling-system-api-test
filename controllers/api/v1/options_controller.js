@@ -23,7 +23,7 @@ module.exports.createOption = async function(req, res){
     try{
         console.log(`home in options controller called`);
         let questionId = req.params.id;
-        let optionText = req.query.option;
+        let optionText = req.body.option;
         let foundQuestion = await Question.findById(questionId).populate('options');
         if(foundQuestion){
 
