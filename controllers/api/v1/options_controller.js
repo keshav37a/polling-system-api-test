@@ -47,3 +47,39 @@ module.exports.createOption = async function(req, res){
         });
     }    
 }
+
+module.exports.addVote = async function(req, res){
+    console.log('addVote in options_controller called');
+    let optionId = req.params.id;
+    try{
+        let foundOption = await Option.update({ _id: optionId }, { $inc: { votes: 1}});
+        if(foundOption){
+            let updatedOption = await Option.findById(optionId);
+            return res.status(200).json({
+                data: updatedOption, 
+                message: 'vote added for option successfully'
+            });
+        }
+    
+        // let foundOption = await Option.findById(optionId);
+        // if(foundOption){
+        //     // foundOption.updateOne({_id: optionId}, {$inc:{votes: 1}});
+        //     foundOption.update({$inc:{votes: 1}});
+        //     await foundOption.save();
+        //     return res.status(200).json({
+        //         data: foundOption, 
+        //         message: 'vote added for option successfully'
+        //     });
+        // }
+        else{
+            return res.status(404).json({
+                message: 'option id not found'
+            });
+        }
+    }
+    catch(err){
+        return res.status(500).json({
+            message: `${err}`
+        });
+    }    
+}

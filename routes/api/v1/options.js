@@ -3,5 +3,6 @@ const router = express.Router();
 const optionsController = require('../../../controllers/api/v1/options_controller');
 
 router.get('/', optionsController.home);
+router.post('/:id/add_vote', optionsController.addVote);
 
 module.exports = router;
