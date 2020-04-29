@@ -2,12 +2,12 @@ const Question = require('../../../models/question');
 const FData = require('../../../config/formattedData');
 const Option = require('../../../models/option');
 
+//Returning the list of all questions with their respective options
 module.exports.home = async function(req, res){
     try{
         let questions = await Question.find().populate('options');
         let data = [];
         for(let i=0; i<questions.length; i++){
-            console.log(questions[i]);
             let formattedQ = FData.getFormattedData(questions[i]);
             data.push(formattedQ);
         }
@@ -23,8 +23,8 @@ module.exports.home = async function(req, res){
     }   
 }
 
+//Returning a single question by id along with its options
 module.exports.getQuestionDetails = async function(req, res){
-    console.log('getQuestionDetails in questions_controller called');
     try{
         let questionId = req.params.id;
         let questionFound = await Question.findById(questionId).populate('options');
@@ -44,16 +44,16 @@ module.exports.getQuestionDetails = async function(req, res){
     }   
 }
 
+//Creates a new question
 module.exports.createQuestion = async function(req, res){
 
     try{
         let title = req.query.title;
         console.log(title);
         console.log('create question called in questions_controller');
-        //Check if the question title has already been used or not
-    
+
+        //Check if the question title has already been used or not. If it has not been used then create a new question
         let question = await Question.findOne({title:title});
-        // console.log(question._id);
         if(question){
             return res.status(405).json({
                 message: 'This question title has already been used'
@@ -74,6 +74,7 @@ module.exports.createQuestion = async function(req, res){
     }
 }
 
+//Delete a question along with its respective options only if votes are 0 for all the options
 module.exports.deleteQuestion = async function(req, res){
     try{
         let qId = req.params.id;

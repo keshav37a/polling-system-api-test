@@ -7,6 +7,8 @@ module.exports.signUp = async function(req, res){
         console.log('signup called');
         console.log(req.body);
         let unencrPass = req.body.password;
+
+        //Encrypting the passport before storing it in db
         let encrPass = Crypto.encrypt(unencrPass);
         console.log(req.query);
         let user = await User.create({name: req.body.name, email:req.body.email, password:encrPass});
@@ -35,6 +37,7 @@ module.exports.createSession = async function (req, res) {
         console.log(req.body);
         let user = await User.findOne({email: req.body.email});
 
+        //Decrypting the passport before comparing
         let encrPass = user.password;
         let dencrPass = Crypto.decrypt(encrPass);
 

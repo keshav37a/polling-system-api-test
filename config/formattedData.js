@@ -1,3 +1,4 @@
+//function to format data and send only the required fields and adding a link to increase votes for each option
 module.exports.getFormattedData = function(questionFound){
     let data = {};
     data.id = questionFound._id;

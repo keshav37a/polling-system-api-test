@@ -2,9 +2,9 @@ const Option = require('../../../models/option');
 const Question = require('../../../models/question');
 const FData = require('../../../config/formattedData');
 
+//Retrieving the list of all questions along with their respective options
 module.exports.home = async function(req, res){
     try{
-        console.log(`home in options controller called`);
         let questions = await Question.find().populate('options');
         return res.status(200).json({
             data: questions,
@@ -18,12 +18,12 @@ module.exports.home = async function(req, res){
     }       
 }
 
+//Creating an option only if it has not been created already
 module.exports.createOption = async function(req, res){
     try{
         console.log(`home in options controller called`);
         let questionId = req.params.id;
         let optionText = req.query.option;
-        // let optionText = "randomOptionN";
         let foundQuestion = await Question.findById(questionId).populate('options');
         if(foundQuestion){
 
@@ -58,8 +58,8 @@ module.exports.createOption = async function(req, res){
     }    
 }
 
+//increment vote by one for the particular option if it exists
 module.exports.addVote = async function(req, res){
-    console.log('addVote in options_controller called');
     let optionId = req.params.id;
     try{
         let foundOption = await Option.update({ _id: optionId }, { $inc: { votes: 1}});
@@ -83,7 +83,7 @@ module.exports.addVote = async function(req, res){
     }    
 }
 
-
+//deleting an option from the options table and the options field in the questions table if the option is found
 module.exports.deleteOption = async function(req, res){
     try{
         let id = req.params.id;

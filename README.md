@@ -33,13 +33,13 @@ After the project has successfully run, In a web browser you can run the followi
   This will first check if the question with that title is already present in the database. If yes then it will add a new option in that question and return the question with the newly added option.
 
 * `http://localhost:8000/api/v1/questions/<question_id>/delete`\
-  Two conditions need to be fulfilled for successful deletion
-  1).  The user must be logged in
+  Two conditions need to be fulfilled for successful deletion\
+  1).  The user must be logged in\
   2).  There are no votes on any of the options of the question
 
 * `http://localhost:8000/api/v1/options/<option_id>/delete`\
-  Two conditions need to be fulfilled for successful deletion
-  1).  The user must be logged in
+  Two conditions need to be fulfilled for successful deletion\
+  1).  The user must be logged in\
   2).  There are no votes on the option
 
 * `http://localhost:8000/api/v1/options/<option_id>/add_vote`\
