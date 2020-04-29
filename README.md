@@ -2,7 +2,7 @@
 
 ## Dependencies needed to install
 
-To install any dependency required, just run the command `npm install <dependency_name>`.\
+To install any dependency required, Navigate to the project directory, open the terminal and run the command `npm install <dependency_name>`.\
 For example `npm install express`
 
 The following dependencies need to be installed before running the project
@@ -26,7 +26,7 @@ After the project has successfully run, In a web browser you can run the followi
   This will first check if the question with that title is already present in the database. If not only then a new question will be added in the database.
 
 * `http://localhost:8000/api/v1/questions/<question_id>/options/create/?option=<your_option>`'\
-  This will first check if the question with that title is already present in the database. If yes then it will add a new option in that question and return the question with the newly added option
+  This will first check if the question with that title is already present in the database. If yes then it will add a new option in that question and return the question with the newly added option.
 
 * `http://localhost:8000/api/v1/questions/<question_id>/delete`\
   This will delete and return us the deleted question and its associated options only if none of those options have any votes on them.
