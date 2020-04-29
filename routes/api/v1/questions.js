@@ -4,6 +4,7 @@ const questionsController = require('../../../controllers/api/v1/questions_contr
 const optionsController = require('../../../controllers/api/v1/options_controller');
 
 router.get('/', questionsController.home);
+router.get('/:id', questionsController.getQuestionDetails);
 router.post('/create', questionsController.createQuestion);
 router.post('/:id/options/create', optionsController.createOption);
 
