@@ -1,6 +1,7 @@
 const port = 8000;
 const express = require('express');
 const app = new express();
+const db = require('./config/mongoose');
 
 app.use('/', require('./routes/index'));
 
