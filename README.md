@@ -10,6 +10,10 @@ The following dependencies need to be installed before running the project
 * express
 * nodemon
 * mongoose
+* passport
+* passport-jwt
+* crypto-js
+* jsonwebtoken
 
 ## Running the project
 
@@ -29,10 +33,14 @@ After the project has successfully run, In a web browser you can run the followi
   This will first check if the question with that title is already present in the database. If yes then it will add a new option in that question and return the question with the newly added option.
 
 * `http://localhost:8000/api/v1/questions/<question_id>/delete`\
-  This will delete and return us the deleted question and its associated options only if none of those options have any votes on them.
+  Two conditions need to be fulfilled for successful deletion
+  1).  The user must be logged in
+  2).  There are no votes on any of the options of the question
 
 * `http://localhost:8000/api/v1/options/<option_id>/delete`\
-  This will delete the option only if it has no votes on it. If no votes are there then it will return us the question with the remaining options.
+  Two conditions need to be fulfilled for successful deletion
+  1).  The user must be logged in
+  2).  There are no votes on the option
 
 * `http://localhost:8000/api/v1/options/<option_id>/add_vote`\
   This will check if the option is present in the database. If yes then the vote count on that option will be incremented by one.
