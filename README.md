@@ -26,10 +26,10 @@ After the project has successfully run, In a web browser you can run the followi
 * `http://localhost:8000/api/v1/questions`\
   This will return all the questions along with their options currently present in the catalogue.
 
-* `http://localhost:8000/api/v1/questions/create/?title=<your_question>`'\
+* `http://localhost:8000/api/v1/questions/create`'\
   This will first check if the question with that title is already present in the database. If not only then a new question will be added in the database.
 
-* `http://localhost:8000/api/v1/questions/<question_id>/options/create/?option=<your_option>`'\
+* `http://localhost:8000/api/v1/questions/<question_id>/options/create`'\
   This will first check if the question with that title is already present in the database. If yes then it will add a new option in that question and return the question with the newly added option.
 
 * `http://localhost:8000/api/v1/questions/<question_id>/delete`\
@@ -47,3 +47,9 @@ After the project has successfully run, In a web browser you can run the followi
 
 * `http://localhost:8000/api/v1/questions/<question_id>`\
   This will check if the question is present and if yes then return the question along with options and the link to vote on any one of those option.
+
+* `http://localhost:8000/api/v1/users/create-user`
+  This will add a new user to the database with the following fields passed in the body. Email, Name and Password
+
+* `http://localhost:8000/api/v1/users/create-session`
+  This will authenticate a user by the email and password passed and if authenticated then it will return a bearer token which will be used to authenticate further requests to delete a question/option.
